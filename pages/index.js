@@ -34,5 +34,5 @@ export default function HomePage() {
 // [x] Fetch all art pieces with SWR in pages/index.js
 // [x] Create the component ArtPieces to render a list
 // [x] ArtPieces props: pieces
-// [ ] Create the component ArtPiecePreview
-// [ ] ArtPiecePreview props: image, title, artist
+// [x] Create the component ArtPiecePreview
+// [x] ArtPiecePreview props: image, title, artist
