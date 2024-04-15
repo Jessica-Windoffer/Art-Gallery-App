@@ -16,10 +16,11 @@ export default function ArtPieces({ pieces }) {
     <StyledUl>
       {pieces.map((piece) => (
         <ArtPiecesPreview
+          key={piece.slug}
           image={piece.imageSource}
           title={piece.name}
           artist={piece.artist}
-          key={piece.slug}
+          slug={piece.slug}
         />
       ))}
     </StyledUl>
