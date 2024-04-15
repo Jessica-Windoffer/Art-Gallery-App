@@ -3,6 +3,10 @@ import styled from "styled-components";
 
 const StyledNav = styled.nav`
   width: 100%;
+  bottom: 0;
+  position: fixed;
+  padding: 1rem;
+  background-color: lightblue;
 `;
 
 const StyledUl = styled.ul`
