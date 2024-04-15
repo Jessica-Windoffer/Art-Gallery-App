@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
 const StyledList = styled.li`
   list-style-type: none;
@@ -16,10 +17,12 @@ const StyledText = styled.p`
   padding: 0;
 `;
 
-export default function ArtPiecesPreview({ key, image, title, artist }) {
+export default function ArtPiecesPreview({ slug, image, title, artist }) {
   return (
-    <StyledList key={key}>
-      <StyledImage src={image} height={200} width={150} alt={title} />
+    <StyledList key={title}>
+      <Link href={`/art-pieces/${slug}`}>
+        <StyledImage src={image} height={200} width={150} alt={title} />
+      </Link>
       <StyledText>Title: {title}</StyledText>
       <StyledText>Artist: {artist}</StyledText>
     </StyledList>
