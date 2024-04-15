@@ -12,7 +12,7 @@ const StyledImage = styled(Image)`
 
 const StyledText = styled.p`
   margin-block-start: 5px;
-  marign: 0;
+  margin: 0;
   padding: 0;
 `;
 
