@@ -7,26 +7,39 @@ import { useState } from "react";
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
 export default function App({ Component, pageProps }) {
-  const [isFavorite, setIsFavorite] = useState(false);
   const { data, error, isLoading } = useSWR(
     `https://example-apis.vercel.app/api/art`,
     fetcher
   );
 
-  if (error) return <div>{error.message}</div>;
-  if (isLoading) return <div>loading...</div>;
+  const [favoriteArtPieceSlugs, setFavoriteArtPieceSlugs] = useState([]);
+  function checkIfArtPieceIsFavorite(slug) {
+    const isFavorite = favoriteArtPieceSlugs.includes(slug);
+    return isFavorite;
+  }
 
-  function handleToggleFavorite(slug) {
-    setIsFavorite(
-      data.map((piece) =>
-        piece.slug === slug
-          ? { ...piece, isFavorite: !piece.isFavorite }
-          : piece
-      )
+  function addArtPieceToFavorites(slug) {
+    setFavoriteArtPieceSlugs([...favoriteArtPieceSlugs, slug]);
+  }
+
+  function removeArtPieceFromFavorites(slug) {
+    setFavoriteArtPieceSlugs(
+      favoriteArtPieceSlugs.filter((favoriteSlug) => favoriteSlug !== slug)
     );
   }
-  console.log("Favorite:", isFavorite);
 
+  function handleToggleFavorite(slug) {
+    const isFavorite = checkIfArtPieceIsFavorite(slug);
+    if (isFavorite) {
+      removeArtPieceFromFavorites(slug);
+    } else {
+      addArtPieceToFavorites(slug);
+    }
+  }
+
+  if (error) return <div>{error.message}</div>;
+  if (isLoading) return <div>loading...</div>;
+  console.log(favoriteArtPieceSlugs);
   return (
     <>
       <GlobalStyle />
@@ -39,8 +52,8 @@ export default function App({ Component, pageProps }) {
           <Component
             {...pageProps}
             data={data}
-            isFavorite={isFavorite}
             onToggleFavorite={handleToggleFavorite}
+            checkIfArtPieceIsFavorite={checkIfArtPieceIsFavorite}
           />
         </Layout>
       </SWRConfig>

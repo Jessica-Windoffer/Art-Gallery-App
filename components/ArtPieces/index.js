@@ -11,7 +11,11 @@ const StyledUl = styled.ul`
   padding: 0;
 `;
 
-export default function ArtPieces({ pieces }) {
+export default function ArtPieces({
+  pieces,
+  checkIfArtPieceIsFavorite,
+  onToggleFavorite,
+}) {
   return (
     <StyledUl>
       {pieces.map((piece) => (
@@ -21,6 +25,8 @@ export default function ArtPieces({ pieces }) {
           title={piece.name}
           artist={piece.artist}
           slug={piece.slug}
+          isFavorite={checkIfArtPieceIsFavorite(piece.slug)}
+          onToggleFavorite={() => onToggleFavorite(piece.slug)}
         />
       ))}
     </StyledUl>

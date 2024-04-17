@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
+import FavoriteButton from "../FavoriteButton";
 
 const StyledList = styled.li`
   list-style-type: none;
@@ -17,14 +18,27 @@ const StyledText = styled.p`
   padding: 0;
 `;
 
-export default function ArtPiecesPreview({ slug, image, title, artist }) {
+export default function ArtPiecesPreview({
+  slug,
+  image,
+  title,
+  artist,
+  isFavorite,
+  onToggleFavorite,
+}) {
   return (
-    <StyledList key={title}>
-      <Link href={`/art-pieces/${slug}`}>
-        <StyledImage src={image} height={200} width={150} alt={title} />
-      </Link>
-      <StyledText>Title: {title}</StyledText>
-      <StyledText>Artist: {artist}</StyledText>
-    </StyledList>
+    <>
+      <StyledList key={title}>
+        <Link href={`/art-pieces/${slug}`}>
+          <StyledImage src={image} height={200} width={150} alt={title} />
+        </Link>
+        <StyledText>Title: {title}</StyledText>
+        <StyledText>Artist: {artist}</StyledText>
+      </StyledList>
+      <FavoriteButton
+        isFavorite={isFavorite}
+        onToggleFavorite={onToggleFavorite}
+      />
+    </>
   );
 }
